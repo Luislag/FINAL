@@ -351,12 +351,13 @@ def tenaball():
         print("Bye!")
         return
     else:
-        print(f"find the top 10 {category}")
-    while lives > 0 and len(correct_answer) < 10:
+
+      while lives > 0 and len(correct_answer) < 10:
         print(f"\nYou have {lives} lives left")
         print("tenaball tower:")
         for i, name in enumerate(reveal_ans, start=1):
             print(f"{i}. {name}")
+        print(f"find the top 10 {category}")
         player = input("Enter a player's full name: ")
         if player in random_tenaball and player not in correct_answer:
             position = random_tenaball.index(player) + 1
