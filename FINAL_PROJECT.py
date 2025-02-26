@@ -476,8 +476,11 @@ def Footy_tictactoe():
             else:
                 current_team = Team_2
                 symbol = away_team
-            player_name = input(
-                f"\n{current_team}, pick a player to try and score: ").strip()  # The function strip eliminates all the useless spaces to be able to compare the names directly to the dictionary
+            player_name = input(f"\n{current_team}, pick a player to try and score: ").strip()# The function strip eliminates all the useless spaces to be able to compare the names directly to the dictionary
+            if player_name.lower() == "exit":
+                print("Exiting game. Goodbye!")
+                endloop = True
+                break
             # Check if the player picked is within the options in the dictionary
             if player_name not in player_to_cell:
                 print("That player is not available for the game!. Choose another option")
@@ -983,7 +986,7 @@ def missing11():
 # --------------------- MAIN MENU ---------------------
 
 def main_menu():
-    print("Welcome to the BIEBIR assistant!")
+    print("Welcome to the BIEBIR HUB")
     print("Choose a mode:")
     print("1: Play Games")
     print("2: Bond Calculations")
