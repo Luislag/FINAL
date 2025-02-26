@@ -684,7 +684,7 @@ def footynator():
          "nationality": "Spain"},
         {"name": "Sadio Mané", "league": "Bundesliga", "team": "Bayern Munich", "position": "Forward", "age": "32",
          "nationality": "Senegal"},
-        {"name": "Karim Benzema ", "league": "Saudi Pro League", "team": "Al-Ittihad", "position": "Forward",
+        {"name": "Karim Benzema", "league": "Saudi Pro League", "team": "Al-Ittihad", "position": "Forward",
          "age": "37", "nationality": "France"},
         {"name": "Erling Haaland", "league": "Premier League", "team": "Manchester City", "position": "Forward",
          "age": "24", "nationality": "Norway"},
@@ -730,7 +730,7 @@ def footynator():
          "age": "35", "nationality": "Germany"},
         {"name": "Vinicius Junior", "league": "La Liga", "team": "Real Madrid", "position": "Forward", "age": "24",
          "nationality": "Brazil"},
-        {"name": "Nico Williams", "league": "La Liga", "team": "Athletic Bilbao", "position": "Forward", "age": "22",
+        {"name": "Nico Williams", "league": "La Liga", "team": "Athletico Bilbao", "position": "Forward", "age": "22",
          "nationality": "Spain"},
         {"name": "Lamine Yamal", "league": "La Liga", "team": "Barcelona", "position": "Forward", "age": "17",
          "nationality": "Spain"},
@@ -751,11 +751,14 @@ def footynator():
         {"name": "Dani Carvajal", "league": "La Liga", "team": "Real Madrid", "position": "Defender", "age": "33",
          "nationality": "Spain"},
         {"name": "Gonzalo Garcia", "league": "La Liga", "team": "Real Madrid", "position": "Forward", "age": "20",
-         "nationality": "Spain"}
+         "nationality": "Spain"},
     ]
 
     print("Think of a football player, and I'll try to guess who it is by asking a few questions.")
+    print("At any point, type 'exit' to quit the game.")
+
     candidates = players.copy()
+
     questions = [
         ("league", "Which league does he play in?"),
         ("position", "What is his position?"),
@@ -767,14 +770,34 @@ def footynator():
     for attribute, question in questions:
         if len(candidates) == 1:
             break
+
         answer = input(question + " ").strip()
+        if answer.lower() == "exit":
+            print("Exiting the game.")
+            return
+
         candidates = filter_players(candidates, attribute, answer)
+
         if not candidates:
-            print("No player matches that description.")
+            print("No player matches that description. Please try again.")
             return
 
     if len(candidates) == 1:
-        print("The player you are thinking of is:", candidates[0]["name"])
+        guessed_player = candidates[0]["name"]
+        print("The player you are thinking of is:", guessed_player)
+        correct = input("Was I correct? (yes/no) ").strip().lower()
+        if correct in ("yes", "y"):
+            print("Great! Thanks for playing!")
+        else:
+            correct_name = input("Oh no, what player were you thinking of? ").strip()
+            correct_league = input("Which league does he play in? ").strip()
+            correct_position = input("What position does he play in? ").strip()
+            correct_nationality = input("What is his nationality? ").strip()
+            correct_team = input("Which team does he play for? ").strip()
+            correct_age = input("How old is he? ").strip()
+            print(f"Thanks for letting me know! I'll add {correct_name} to my records")
+            print("Thanks for playing!")
+            return
     else:
         print("I couldn't guess with certainty. The players that match are:")
         for player in candidates:
