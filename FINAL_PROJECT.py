@@ -524,15 +524,53 @@ def Footy_tictactoe():
     play_game(Team_1, Team_2, row_labels, col_labels, player_to_cell)
 
 def tenaball():
-    barcelona_signings = ["Philippe Coutinho", "Ousmane Dembele", "Antoine Griezmann", "Neymar Jr", "Frenkie de Jong", "Luis Suarez", "Zlatan Ibrahimovic", "Miralem Pjanic", "Raphinha", "Dani Olmo"]
-    degea_app = ["Marcus Rashford", "Chris Smalling", "Anthony Martial", "Juan Mata", "Antonio Valencia", "Ashley Young", "Luke Shaw", "Wayne Rooney", "Phil Jones", "Victor Lindelof"]
-    juve_real = ["Cristiano Ronaldo", "Zinedine Zidane", "Gonzalo Higuain", "Alvaro Morata", "Sami Khedira", "Danilo", "Fabio Cannavaro", "Angel Di Maria", "Emerson", "Micheal Laudrup"]
-    spain_app = ["Sergio Ramos", "Iker Casillas", "Sergio Busquets", "Xavi", "Andres Iniesta", "Andoni Zubizarreta", "David Silva", "Xabi Alonso", "Fernando Torres", "Cesc Fabregas"]
-    top_goals = ["Cristiano Ronaldo", "Lionel Messi", "Pele", "Romario", "Ferenc Puskas", "Josef Bican", "Robert Lewandowski", "Jimmy Jones", "Gerd Muller", "Joe Bambrick"]
-    antony_app = ["Lisandro Martinez", "Bruno Fernandes", "Dusan Tadic", "Andre Onana", "Diogo Dalot", "Ryan Gravenberch", "Casemiro", "Davy Klaassen", "Daley Blind", "Edson Alvarez"]
-    ancelotti_used = ["Luka Modric", "Dani Carvajal", "Karim Benzema", "Federico Valverde", "Toni Kroos", "Vinicius Junior", "Thibaut Courtois", "Rodrygo", "Antonio Rudiger", "Nacho Fernandez"]
-    lEnrique_used = ["Lionel Messi", "Luis Suarez", "Neymar Jr", "Sergio Busquets", "Gerard Pique", "Javier Mascherano", "Ivan Rakitic", "Jordi Alba", "Andres Iniesta", "Ter Stegen"]
-    random_tenaball, category  = random.choice([
+    barcelona_signings = ["Philippe Coutinho", "Ousmane Dembele", "Antoine Griezmann", "Neymar Jr", "Frenkie de Jong",
+                          "Luis Suarez", "Zlatan Ibrahimovic", "Miralem Pjanic", "Raphinha", "Dani Olmo"]
+
+    # most appearances with keeper David de Gea
+
+    degea_app = ["Marcus Rashford", "Chris Smalling", "Anthony Martial", "Juan Mata", "Antonio Valencia",
+                 "Ashley Young", "Luke Shaw", "Wayne Rooney", "Phil Jones", "Victor Lindelof"]
+
+    # most combined games for Real Madrid and Juventus
+
+    juve_real = ["Cristiano Ronaldo", "Zinedine Zidane", "Gonzalo Higuain", "Alvaro Morata", "Sami Khedira", "Danilo",
+                 "Fabio Cannavaro", "Di Maria", "Emerson", "Micheal Laudrup"]
+
+    # most spanish national team appearances
+
+    spain_app = ["Sergio Ramos", "Iker Casillas", "Sergio Busquets", "Xavi", "Andres Iniesta", "Andoni Zubizarreta",
+                 "David Silva", "Xabi Alonso", "Fernando Torres", "Cesc Fabregas"]
+
+    # highest alltime goalscorers
+
+    top_goals = ["Cristiano Ronaldo", "Lionel Messi", "Pele", "Romario", "Ferenc Puskas", "Josef Bican",
+                 "Robert Lewandowski", "Jimmy Jones", "Gerd Muller", "Joe Bambrick"]
+
+    # most appearances with teammate Antony
+
+    antony_app = ["Lisandro Martinez", "Bruno Fernandes", "Dusan Tadic", "Andre Onana", "Diogo Dalot",
+                  "Ryan Gravenberch", "Casemiro", "Davy Klaassen", "Daley Blind", "Edson Alvarez"]
+
+    # most used players by coach Carlo Ancelotti at Real Madrid
+
+    ancelotti_used = ["Luka Modric", "Dani Carvajal", "Karim Benzema", "Federico Valverde", "Toni Kroos",
+                      "Vinicius Junior", "Thibaut Courtois", "Rodrygo", "Antonio Rudiger", "Nacho Fernandez"]
+
+    # most used players by coach Luis Suarez at Fc Barcelona
+
+    lEnrique_used = ["Lionel Messi", "Luis Suarez", "Neymar Jr", "Sergio Busquets", "Gerard Pique", "Javier Mascherano",
+                     "Ivan Rakitic", "Jordi Alba", "Andres Iniesta", "Ter Stegen"]
+
+    manu_managers = ["Ruben Amorim", "Ruud Van Nistelrooy", "Ten Hag", "Ralf Rangnick", "Michael Carrick",
+                     "Ole Gunnar Solskjaer", "Jose Mourinho", "Louis Van Gaal", "Ryan Giggs", "David Moyes"]
+
+    ronaldo_assist = ["Karim Benzema", "Mesut Ozil", "Gareth Bale", "Di Maria", "Marcelo", "Ryan Giggs",
+                      "Gonzalo Higuain", "Isco", "Kaka", "Lucas Vazquez"]
+
+    # Code to randomly choose the tenaball category and its list for the game
+
+    random_tenaball, category = random.choice([
         (barcelona_signings, "most expensive barça signings"),
         (degea_app, "most appearances with teammate David de Gea"),
         (juve_real, "players with the most combined appearances for Juventus and Real Madrid"),
@@ -541,41 +579,78 @@ def tenaball():
         (antony_app, "players with most appearances with teammate Antony"),
         (ancelotti_used, "most used players by coach Ancelotti at Real Madrid"),
         (lEnrique_used, "most used players by coach lEnrique at Fc Barcelona"),
+        (manu_managers, "managers to have coached Manchester United after Sir Alex Ferguson"),
+        (ronaldo_assist, "players that have provided the most assists to teammate Cristiano Ronaldo"),
     ])
+
+    # so that we can track how many the player has guessed
     correct_answer = []
+
+    # object that defines the amount of lives you
     lives = 3
+
+    # Scoreboard object so to substitute the name of the player by the question mark
     reveal_ans = ["?" for _ in random_tenaball]
+
+    # starting the game
     print("Welcome to our Tenaball game mode")
-    play = input("Do you want to play or exit? ").strip()
+    play = input("Do you want to play or exit?")
+    # if player types exit it will. not run
     if play == "exit":
         print("Bye!")
         return
+
+    # anything else will start the game
     else:
-      while lives > 0 and len(correct_answer) < 10:
-        print(f"\nYou have {lives} lives left")
-        print("tenaball tower:")
-        for i, name in enumerate(reveal_ans, start=1):
-            print(f"{i}. {name}")
-        print(f"find the top 10 {category}")
-        player = input("Enter a player's full name: ")
-        if player in random_tenaball and player not in correct_answer:
-            position = random_tenaball.index(player) + 1
-            print(f"You guessed {player} correctly, he is number {position} on the list")
-            reveal_ans[position-1] = player
-            correct_answer.append(player)
-            lives = 3
-        elif player in correct_answer:
-            print("You already guessed that player")
+        # will start a loop that will keep going as long as lives are not 0 or the amount of player guessed is less than 10
+        while lives > 0 and len(correct_answer) < 10:
+            print(f"\nYou have {lives} lives left")
+
+            # will print the tenaball tower which will allows the player to later see what position of the players he guessed
+            print("tenaball tower:")
+            for i, name in enumerate(reveal_ans, start=1):
+                print(f"{i}. {name}")
+            print(f"find the top 10 {category}")
+
+            player = input("Enter a player's full name: ")
+
+            # check if guessed player is in the top 10
+            if player in random_tenaball and player not in correct_answer:
+                # will define what position in the top 10 the player is in
+                position = random_tenaball.index(player) + 1
+                # will print what position in the top 10 the player is in
+                print(f"You guessed {player} correctly, he is number {position} on the list")
+                # will then add the correct player to the list by removing the question mark by the player name
+                reveal_ans[position - 1] = player
+                # adds the player in the list of correct answers so that we can see how many right players
+                # the user has guessed
+                correct_answer.append(player)
+                lives = 3
+
+                # if player has already been guessed
+            elif player in correct_answer:
+                print("You already guessed that player")
+                # lives == lives
+
+                # if player is not on the list
+            else:
+                print(f"{player} is not on the list")
+                # removes a life
+                lives -= 1
+
+        # conditionalities for the code to see if it should stop
+        # stops if the length of players is the top 10 given
+        if len(correct_answer) == 10:
+            print("\nYou beat the Tenaball")
+
+        # or it will also stop if lives reach zero
+
         else:
-            print(f"{player} is not on the list")
-            lives -= 1
-    if len(correct_answer) == 10:
-        print("\nYou beat the Tenaball")
-    else:
-        print("\nThe Tenaball beat you")
-        print(f"The correct players were:")
-        for position, player in enumerate(random_tenaball, start=1):
-            print(f"{position}. {player}")
+            print("\nThe Tenaball beat you")
+            print(f"The correct players were:")
+            for position, player in enumerate(random_tenaball, start=1):
+                print(f"{position}. {player}")
+
 
 def filter_players(players, attribute, value):
     """
